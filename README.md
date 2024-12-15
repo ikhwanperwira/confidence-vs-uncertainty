@@ -1,4 +1,4 @@
-![label_0(1)](https://github.com/user-attachments/assets/a5e1624b-9260-4573-9f17-4cd2e32aaf4f)![image](https://github.com/user-attachments/assets/89146db4-56b8-4909-84f1-a548c4d9d577)![image](https://github.com/user-attachments/assets/6452396a-44ad-4033-bdec-80e48b46c486)# Explainable AI: Confidence and Uncertainty
+# Explainable AI: Confidence and Uncertainty
 
 Welcome to the repository for the project **Explainable AI: Confidence and Uncertainty Based on Minimax and Relative Uniformity of Softmax Output**. This repository includes the code, resources, and documentation for analyzing the confidence and uncertainty of machine learning models using Softmax probabilities.
 
