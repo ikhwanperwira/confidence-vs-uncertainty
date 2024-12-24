@@ -23,16 +23,16 @@ Welcome to the repository for the project **Explainable AI: Confidence and Uncer
 - $\text{inf} = -\log_2(\epsilon)$ (where $\epsilon$ is the smallest representable number for the data type)
 
 **Computation of Confidence:**
+
 $$
 c_i = \frac{\log_2(N-1) - \log_2(N) - \log_2(1 - a_i)}{\text{inf}}
 $$
-where $a_i = \max(\mathbf{p}_i)$, $N = k$ (number of classes)
 
 **Computation of Uncertainty:**
+
 $$
 u_i = \frac{2^{-\log_2(N) - \log_2(b_i) - c_i} - 1}{2^{-\log_2(N) - \log_2(b_i) - c_i} + 1}
 $$
-where $b_i = \min(\mathbf{p}_i)$
 
 **Outputs:**
 - $c \in \mathbb{R}^{n}$ (confidence for each sample)
