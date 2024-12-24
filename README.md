@@ -11,6 +11,20 @@ Welcome to the repository for the project **Explainable AI: Confidence and Uncer
 
 ---
 
+## Overview
+
+This project explores:
+
+- The limitations of using `argmax` in evaluating model confidence.
+- New approaches for measuring uncertainty, such as **minimax** and **relative uniformity**.
+- Methods for improving Explainable AI (XAI) by visualizing confidence and uncertainty.
+
+Key highlights include:
+- Evaluation on the MNIST dataset with experiments involving rotated samples.
+- A focus on increasing interpretability of predictions.
+
+---
+
 ## Formula
 
 ### Inputs:
@@ -87,20 +101,6 @@ The final output is a matrix $\mathbf{output} \in \mathbb{R}^{n_{\text{samples}}
 
 ---
 
-
-## Overview
-
-This project explores:
-
-- The limitations of using `argmax` in evaluating model confidence.
-- New approaches for measuring uncertainty, such as **minimax** and **relative uniformity**.
-- Methods for improving Explainable AI (XAI) by visualizing confidence and uncertainty.
-
-Key highlights include:
-- Evaluation on the MNIST dataset with experiments involving rotated samples.
-- A focus on increasing interpretability of predictions.
-
----
 
 ## Visualizations
 
