@@ -13,30 +13,79 @@ Welcome to the repository for the project **Explainable AI: Confidence and Uncer
 
 ## Formula
 
-**Inputs:**
-- $\mathbf{p} \in \mathbb{R}^{n \times k}$: The predicted probabilities, where $n$ is the number of samples and $k$ is the number of classes. Each element $p_{i,j}$ represents the predicted probability of the $i$-th sample belonging to the $j$-th class.
+### Inputs:
+- Let $\mathbf{p} \in \mathbb{R}^{n_{\text{samples}} \times n_{\text{classes}}}$ be the input matrix of predicted probabilities, where:
+  - $n_{\text{samples}}$ is the number of samples.
+  - $n_{\text{classes}}$ is the number of classes (i.e., the number of possible predictions per sample).
+  - Each element $p_{i,j} \in [0, 1]$ represents the predicted probability for sample $i$ and class $j$, and for each $i$, we have $\sum_{j=1}^{n_{\text{classes}}} p_{i,j} = 1$.
 
-**Definitions:**
-- $N = k$ (number of classes)
-- $a_i = \max(\mathbf{p}_i)$ (maximum predicted probability for the $i$-th sample)
-- $b_i = \min(\mathbf{p}_i)$ (minimum predicted probability for the $i$-th sample)
-- $\text{inf} = -\log_2(\epsilon)$ (where $\epsilon$ is the smallest representable number for the data type)
+---
 
-**Computation of Confidence:**
+### Definitions:
+- Let $N = n_{\text{classes}}$ denote the number of classes.
+- $\text{inf} = -\log_2(\epsilon)$ (where $\epsilon$ is the smallest representable number for the input's data type)
+- For each sample $i$, define:
+  - The maximum predicted probability $a_i = \max_j (p_{i,j})$.
+  - The minimum predicted probability $b_i = \min_j (p_{i,j})$.
+
+---
+
+### Confidence:
+For each sample $i$, the confidence is defined as:
 
 $$
-c_i = \frac{\log_2(N-1) - \log_2(N) - \log_2(1 - a_i)}{\text{inf}}
+c_i = \log_2(N - 1) - \log_2(N) - \log_2(1 - a_i)
 $$
 
-**Computation of Uncertainty:**
+where $a_i = \max_j (p_{i,j})$ is the maximum predicted probability for sample $i$.
+
+**Specifically:**
+The confidence for each sample is normalized as:
 
 $$
-u_i = \frac{2^{-\log_2(N) - \log_2(b_i) - c_i} - 1}{2^{-\log_2(N) - \log_2(b_i) - c_i} + 1}
+c_i' = \frac{c_i}{\inf}
 $$
 
-**Outputs:**
-- $c \in \mathbb{R}^{n}$ (confidence for each sample)
-- $u \in \mathbb{R}^{n}$ (uncertainty for each sample)
+where $\inf$ is a large constant, representing the inverse of the smallest representable number of the data type, ensuring that the confidence is mapped to the range $[0, 1]$.
+
+---
+
+### Uncertainty:
+The uncertainty for each sample $i$ is defined as:
+
+$$
+u_i = -\log_2(N) - \log_2(b_i) - c_i
+$$
+
+where $b_i = \min_j (p_{i,j})$ is the minimum predicted probability for sample $i$, and $c_i$ is the confidence for sample $i$.
+
+**Specifically:**
+The uncertainty for each sample is normalized as:
+
+$$
+u_i' = \frac{u_i}{\inf}
+$$
+
+where $\inf$ is the same large constant used for normalizing the confidence.
+
+Then, the uncertainty is transformed as:
+
+$$
+u_i'' = \frac{2^{u_i'} - 1}{2^{u_i'} + 1}
+$$
+
+This maps the uncertainty values to the range $[0, 1]$.
+
+---
+
+### Outputs:
+- The output consists of two arrays:
+  1. **Confidence array $\mathbf{c}$**: A normalized confidence value for each sample, where $c_i' \in [0, 1]$.
+  2. **Uncertainty array $\mathbf{u}$**: A normalized uncertainty value for each sample, where $u_i'' \in [0, 1]$.
+  
+The final output is a matrix $\mathbf{output} \in \mathbb{R}^{n_{\text{samples}} \times 2}$, where each row contains the normalized confidence and uncertainty values for each sample.
+
+---
 
 
 ## Overview
