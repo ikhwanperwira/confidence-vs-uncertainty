@@ -37,7 +37,7 @@ Key highlights include:
 
 ### Definitions:
 - Let $N = n_{\text{classes}}$ denote the number of classes.
-- $\text{inf} = -\log_2(\epsilon)$ (where $\epsilon$ is the smallest representable number for the input's data type)
+- Let $\text{inf} = -\log_2(\epsilon)$ (where $\epsilon$ is the smallest representable number for the input's data type)
 - For each sample $i$, define:
   - The maximum predicted probability $a_i = \max_j (p_{i,j})$.
   - The minimum predicted probability $b_i = \min_j (p_{i,j})$.
